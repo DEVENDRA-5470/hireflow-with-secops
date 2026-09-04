@@ -1,19 +1,17 @@
-name: Application to SecOps Trigger
-
+name: Step 1 - Verify Application Push Trigger
 on:
   push:
     branches:
-      - main
-
+        - main
 jobs:
-  application-to-secops:
-    name: Verify Application and Trigger SecOps
+  verify-push-trigger: 
+    name: Verify Application Push Trigger
     runs-on: ubuntu-latest
-
     steps:
-      - name: Step 1 - Verify application push
+      - name: Confirmation
         run: |
           echo "Application repository push"
           echo "Repository: ${{ github.repository }}"
-          echo "Branch: ${{ github.ref_name }}"
-          echo "Commit SHA: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref_name}}" 
+          echo "Commit SHA: ${{github.sha}}" 
+

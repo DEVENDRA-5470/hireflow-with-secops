@@ -5,7 +5,7 @@ on:
         - main
 jobs:
   verify-push-trigger: 
-    name: Verify Application Push Triggerr
+    name: Verify Application Push Trigger
     runs-on: ubuntu-latest
     steps:
       - name: Confirmation

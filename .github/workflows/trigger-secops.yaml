@@ -28,9 +28,9 @@ jobs:
              - d '{
                 "event_type":"application_push",
                 "client_payload":{
-                  "repository": "${{github.repository}}",
-                  "branch":"${{github.ref_name}}",
-                  "commit_sha":"${{github.sha}}"
+                  "repository": "${{ github.repository }}",
+                  "branch":"${{ github.ref_name }}",
+                  "commit_sha":"${{ github.sha }}"
                   }
              }'
         

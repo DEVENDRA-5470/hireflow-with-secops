@@ -32,6 +32,6 @@ jobs:
                 "branch":"${{ github.ref_name }}",
                 "commit_sha":"${{ github.sha }}"
               }
-             }'
+            }'
         
 

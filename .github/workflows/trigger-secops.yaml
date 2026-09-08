@@ -33,5 +33,3 @@ jobs:
                 "commit_sha":"${{ github.sha }}"
               }
             }'
-        
-

@@ -1,6 +1,7 @@
 const API_URL = (() => {
   const configuredURL =
     import.meta.env.VITE_API_URL?.trim();
+  const API_KEY = "sk_live_51N3x7Kp9Qm2Vt8Rz4Yw6Hu1Bc5De7Fg";
 
   if (configuredURL) {
     return configuredURL.replace(/\/+$/, "");

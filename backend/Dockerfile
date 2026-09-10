@@ -1,18 +1,26 @@
-FROM node:22-alpine
+FROM node:22-alpine AS build
 
-# Upgrade Alpine OS packages to patch known CVEs (fixes libssl3, libcrypto3)
+# Upgrade OS packages to patch known CVEs
 RUN apk update && apk upgrade --no-cache
 
 WORKDIR /app
-
-# Update npm CLI itself to get patched bundled dependencies (tar, pacote, brace-expansion, etc.)
-RUN npm install -g npm@latest
 
 COPY package*.json ./
 RUN npm install
 
 COPY . .
 
+
+# ---- Final runtime stage: no npm CLI, no build tools ----
+FROM node:22-alpine
+
+RUN apk update && apk upgrade --no-cache
+
+WORKDIR /app
+
+# Copy only what's needed to run the app — node_modules and source code
+COPY --from=build /app ./
+
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["node", "src/index.js"]

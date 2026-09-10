@@ -1,6 +1,5 @@
 FROM node:22-alpine AS build
 
-# Upgrade OS packages to patch known CVEs
 RUN apk update && apk upgrade --no-cache
 
 WORKDIR /app
@@ -11,14 +10,14 @@ RUN npm install
 COPY . .
 
 
-# ---- Final runtime stage: no npm CLI, no build tools ----
+# ---- Final runtime stage ----
 FROM node:22-alpine
 
-RUN apk update && apk upgrade --no-cache
+RUN apk update && apk upgrade --no-cache && \
+    rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 
 WORKDIR /app
 
-# Copy only what's needed to run the app — node_modules and source code
 COPY --from=build /app ./
 
 EXPOSE 3000
